@@ -1,0 +1,22 @@
+deployment:
+  name: aciblobapp-deploy
+  namespace: aks-workshop-qa
+  labels:
+    app: aciblobapp-deploy
+  selectorLabels:
+    app: aciblobapp-pod
+  replicas: 2
+  strategyType: RollingUpdate
+  maxSurge: 1
+  maxUnavailable: 1
+  nodeSelector:
+    agentpool: aksapipool  
+  containers:
+  - name: aciblobapp-app
+    image: akswkshpacr.azurecr.io/aciblob-app:v1.0.0
+    imagePullPolicy: IfNotPresent    
+    memoryRequest: "3500Mi"
+    cpuRequest: "350m"
+    memoryLimit: "600Mi"
+    cpuLimit: "600m"
+    containerPorts: [80]    
