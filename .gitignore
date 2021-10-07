@@ -265,5 +265,6 @@ __pycache__/
 
 !.gitignore
 .vscode/
-aciblobapp-chart/**/misc/
+Source/ACIBlobApp/.vscode/
+helms/**/misc/
 YAMLs/
