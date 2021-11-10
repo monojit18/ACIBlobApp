@@ -13,7 +13,7 @@ deployment:
     agentpool: aksapipool  
   containers:
   - name: aciblobapp-app
-    image: akswkshpacr.azurecr.io/aciblob-app:v1.0.0
+    image: akswkshpacr.azurecr.io/aciblob-app:v1.0.1
     imagePullPolicy: IfNotPresent    
     memoryRequest: "250Mi"
     cpuRequest: "250m"

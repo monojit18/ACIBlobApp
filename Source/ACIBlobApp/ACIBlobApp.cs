@@ -27,6 +27,9 @@ namespace ACIBlobApp
             logger.LogInformation(cloudBlockBlob.Name);
             var cloudQueueMessage = new CloudQueueMessage(cloudBlockBlob.Name);
             await cloudQueueMessageCollector.AddAsync(cloudQueueMessage);
+            var couldDelete = await cloudBlockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots,
+                                                                        null, null, null);
+            logger.LogInformation(couldDelete.ToString());
 
         }
     }

@@ -264,7 +264,8 @@ __pycache__/
 *.pyc
 
 !.gitignore
-.vscode/
+
 Source/ACIBlobApp/.vscode/
 helms/**/misc/
 YAMLs/
+.vscode/launch.json
