@@ -13,9 +13,6 @@ az acr build -t $acrName.azurecr.io/aciblob-app:v1.0.0 -r $acrName .
 
 k create secret generic keda-stg-secret -n serverless --from-literal=AzureWebJobsStorage=""
 
-Serverless
-===========
-
 helm install aciblobapp-chart -n serverless ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSTrain/values.yaml
 helm upgrade aciblobapp-chart -n serverless ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSTrain/values.yaml
 helm uninstall aciblobapp-chart -n serverless

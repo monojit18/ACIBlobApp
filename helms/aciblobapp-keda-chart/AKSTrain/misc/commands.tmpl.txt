@@ -1,0 +1,14 @@
+tenantId=""
+subscriptionId=""
+clusterName="aks-train-cluster"
+resourceGroup="aks-train-rg"
+acrName=""
+
+az login --tenant $tenantId
+az aks get-credentials -g $resourceGroup -n $clusterName
+k config set-context --current --namespace=serverless
+
+helm install aciblobapp-keda-chart -n serverless ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSTrain/values-keda.yaml
+helm upgrade aciblobapp-keda-chart -n serverless ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSTrain/values-keda.yaml
+helm uninstall aciblobapp-keda-chart -n serverless
+

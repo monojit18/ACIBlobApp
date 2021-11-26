@@ -1,0 +1,28 @@
+tenantId=""
+subscriptionId=""
+clusterName="aks-workshop-cluster"
+resourceGroup="aks-workshop-rg"
+acrName="akswkshpacr"
+
+az login --tenant $tenantId
+az aks get-credentials -g $resourceGroup -n $clusterName
+k config set-context --current --namespace=aks-workshop-dev
+
+DEV
+===
+
+helm install aciblobapp-keda-chart -n aks-workshop-dev ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-dev.yaml
+helm upgrade aciblobapp-keda-chart -n aks-workshop-dev ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-dev.yaml
+helm uninstall aciblobapp-keda-chart -n aks-workshop-dev
+
+QA
+==
+
+helm install aciblobapp-keda-chart -n aks-workshop-qa ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-qa.yaml
+helm upgrade aciblobapp-keda-chart -n aks-workshop-qa ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-qa.yaml
+helm uninstall aciblobapp-keda-chart -n aks-workshop-qa
+
+
+
+
+
