@@ -1,6 +1,6 @@
 deployment:
   name: aciblobapp-deploy
-  namespace: aks-workshop-dev
+  namespace: serverless
   labels:
     app: aciblobapp-deploy
   selectorLabels:
