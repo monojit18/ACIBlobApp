@@ -6,28 +6,15 @@ acrName=""
 
 az login --tenant $tenantId
 az aks get-credentials -g $resourceGroup -n $clusterName
-k config set-context --current --namespace=aks-workshop-dev
+k config set-context --current --namespace=serverless
 
 #docker build -t $acrName.azurecr.io/aciblob-app:v1.0.0 .
 az acr build -t $acrName.azurecr.io/aciblob-app:v1.0.0 -r $acrName .
 
-k create secret generic web-jobs-storage-secret --from-literal=AzureWebJobsStorage=''
-
-DEV
-===
-
-helm install aciblobapp-chart -n aks-workshop-dev ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values-dev.yaml
-helm upgrade aciblobapp-chart -n aks-workshop-dev ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values-dev.yaml
-helm uninstall aciblobapp-chart -n aks-workshop-dev
-
-QA
-==
-
-helm install aciblobapp-chart -n aks-workshop-qa ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values-qa.yaml
-helm upgrade aciblobapp-chart -n aks-workshop-qa ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values-qa.yaml
-helm uninstall aciblobapp-chart -n aks-workshop-qa
+k create secret generic web-jobs-storage-secret -n serverless --from-literal=AzureWebJobsStorage=''
+#k delete secrets/web-jobs-storage-secret -n serverless
 
 
-
-
-
+helm install aciblobapp-chart -n serverless ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values.yaml
+helm upgrade aciblobapp-chart -n serverless ./aciblobapp-chart/ -f ./aciblobapp-chart/AKSWorkshop/values.yaml
+#helm uninstall aciblobapp-chart -n serverless

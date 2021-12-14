@@ -6,23 +6,9 @@ acrName="akswkshpacr"
 
 az login --tenant $tenantId
 az aks get-credentials -g $resourceGroup -n $clusterName
-k config set-context --current --namespace=aks-workshop-dev
+k config set-context --current --namespace=serverless
 
-DEV
-===
-
-helm install aciblobapp-keda-chart -n aks-workshop-dev ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-dev.yaml
-helm upgrade aciblobapp-keda-chart -n aks-workshop-dev ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-dev.yaml
-helm uninstall aciblobapp-keda-chart -n aks-workshop-dev
-
-QA
-==
-
-helm install aciblobapp-keda-chart -n aks-workshop-qa ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-qa.yaml
-helm upgrade aciblobapp-keda-chart -n aks-workshop-qa ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda-qa.yaml
-helm uninstall aciblobapp-keda-chart -n aks-workshop-qa
-
-
-
-
+helm install aciblobapp-keda-chart -n serverless ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda.yaml
+helm upgrade aciblobapp-keda-chart -n serverless ./aciblobapp-keda-chart/ -f ./aciblobapp-keda-chart/AKSWorkshop/values-keda.yaml
+#helm uninstall aciblobapp-keda-chart -n serverless
 
