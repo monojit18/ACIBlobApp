@@ -269,3 +269,4 @@ Source/ACIBlobApp/.vscode/
 helms/**/dump
 helms/**/misc/commands.txt
 .vscode
+**/.DS_Store
